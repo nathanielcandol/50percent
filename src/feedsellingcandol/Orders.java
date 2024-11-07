@@ -104,22 +104,27 @@ public class Orders {
 
         String status = "Pending";
         
-        String qry = "INSERT INTO tbl_orders (c_id, f_id, o_quantity, o_due, o_rcash, o_date, o_status)"
+            String qry = "INSERT INTO tbl_orders (c_id, f_id, o_quantity, o_due, o_rcash, o_date, o_status)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         conf.addRecord(qry, cid, fid, quantity, due, rcash, date, status);
         
-    }
+    }   
     
     public void viewOrders() {
-    String qry = "SELECT o_id, c_fname, f_name, f_type, f_price, f_stock, o_quantity, o_due, o_date, o_status"
-+ "LEFT JOIN tbl_customers ON tbl_customers.cid = tbl_orders.c_id "
-            + "LEFT JOIN tbl_feeds ON tbl_feeds.fid = tbl_orders.f_id";
-
+    String qry = "SELECT o_id, c_fname, f_name, f_type, f_price, f_stockquantity, o_quantity, o_due, o_date, o_status "
+               + "FROM tbl_orders "
+               + "LEFT JOIN tbl_customers ON tbl_customers.c_id = tbl_orders.c_id "
+               + "LEFT JOIN tbl_feeds ON tbl_feeds.f_id = tbl_orders.f_id";
 
     String[] hrds = {"O_ID", "Customer", "FeedName", "Type", "Price", "Stock", "Order Quantity", "Due", "Date", "Status"};
-String[] clms = {"o_id", "c_fname", "f_name", "f_type", "f_price", "f_stockquantity", "o_quantity", "o_due", "o_date", "o_status"};
+    String[] clms = {"o_id", "c_fname", "f_name", "f_type", "f_price", "f_stockquantity", "o_quantity", "o_due", "o_date", "o_status"};
     config conf = new config();
     conf.viewRecords(qry, hrds, clms);
+}
+
+    private void updateOrders() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    }
 
-}
